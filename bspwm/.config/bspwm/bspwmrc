@@ -35,15 +35,8 @@ bspc config focus_follows_pointer true
 #Settings for manual splitting
 bspc config split_ratio         0.50
 
-#bspc monitor -d i ii iii iv v vi vii viii ix x
-#bspc monitor -d One Two Three Four Five Six Seven Eight Nine Ten
-#bspc monitor -d I II III IV V VI VI IIX IX X
-#bspc monitor -d • • • • • • • • • •
-#bspc monitor -d I II III IV V VI
-#bspc monitor -d           
-
 ###This creates and names desktops for multiple monitors.
-workspaces_multimonitor &
+~/.config/bspwm/workspaces_multimonitor &
 
 bspc rule -a screenkey --unmanage
 bspc rule -a gcolor2 state=floating center=true
@@ -99,9 +92,9 @@ bspc rule -a tint2 border=off manage=off
 
 ###External rules
 ##Pseudo automatic mode: always splits focused window when opening new window
-bspc config external_rules_command /usr/bin/pseudo_automatic_mode
+bspc config external_rules_command ~/.config/bspwm/pseudo_automatic_mode
 ##Adjust new window: splits biggest windows to keep windows about the same size
-#bspc config external_rules_command /usr/bin/adjust-new-window
+#bspc config external_rules_command ~/.config/bspwm/adjust-new-window
 
 ##Autostart apps
 #Keybindings daemon
@@ -109,16 +102,16 @@ bspc config external_rules_command /usr/bin/pseudo_automatic_mode
 #Source autostartfile. Uncomment this if you use bspwm-git
 #. $HOME/.config/bspwm/autostart
 
-# Status bar
-polybar main &
+# Polybar status bar
+~/.config/polybar/launch.sh
 
 # Clipboard daemon
 greenclip daemon &
 
 # picom -b &
 # Alter picom settings if using intel graphics
-GRAPHIC_CARD=$(lspci | grep -i "vga" | sed 's/.*://' | sed 's/(.*//' | sed 's/^[ \t]*//')
-if [[ $(echo $GRAPHIC_CARD | grep -i 'intel\|lenovo') != "" ]]; then MCODE='initrd=\intel-ucode.img'
-  sed -i 's/"xrender"/"glx"/' ~/.config/picom.conf
-  grep -q 'vsync = true;' ~/.config/picom.conf || echo 'vsync = true;' >> ~/.config/picom.conf
-fi
+# GRAPHIC_CARD=$(lspci | grep -i "vga" | sed 's/.*://' | sed 's/(.*//' | sed 's/^[ \t]*//')
+# if [[ $(echo $GRAPHIC_CARD | grep -i 'intel\|lenovo') != "" ]]; then MCODE='initrd=\intel-ucode.img'
+  # sed -i 's/"xrender"/"glx"/' ~/.config/picom.conf
+  # grep -q 'vsync = true;' ~/.config/picom.conf || echo 'vsync = true;' >> ~/.config/picom.conf
+# fi

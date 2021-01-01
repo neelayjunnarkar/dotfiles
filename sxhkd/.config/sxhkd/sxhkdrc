@@ -105,9 +105,13 @@ super + Return
 alt + Return
 	bspc node -n @/
 	
-# go (Shift=move) to desktop (and focus the monitor that the desktop is located on. Bspwm style)
-super + {_,shift + }{1-9,0}
-    bspc {desktop -f,node -d} ^{1-9,10}
+# Move focus to desktop
+super + {1-9,0}
+	bspc desktop -f {I,II,III,IV,V,VI,VII,VIII,IX,X}
+
+# Move window to desktop
+super + shift + {1-9,0}
+	bspc node -d {I,II,III,IV,V,VI,VII,VIII,IX,X}
 
 ## Alternative: i3 style behavior (focus nth, desktop of the focused monitor)
 #super + {1-9,0}

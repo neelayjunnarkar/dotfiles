@@ -89,7 +89,7 @@ let g:edge_enable_italic = 1 " Enable italic comments
 " Gruvbox colorscheme settings
 let g:gruvbox_bold = 1
 let g:gruvbox_underline = 1
-let g:gruvbox_contrast_light = "medium"
+let g:gruvbox_contrast_light = "hard"
 
 " GUI
 set guifont=Inconsolata:h15:w5:b " 11 is pretty fine
@@ -135,8 +135,9 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 " NerdTree enable
 map <C-n> :NERDTreeToggle<CR>
 
-" Let vim-easymotion to do its things by ,+s hotkey
-map <Leader> <Plug>(easymotion-prefix)
+" Let vim-easymotion to do its things with double leader ','
+" Use below to disable double leader
+" map <Leader> <Plug>(easymotion-prefix) 
 
 " Buffers maps
 " You can switch between buffers by comma + buffer number

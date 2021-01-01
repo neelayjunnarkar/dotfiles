@@ -9,11 +9,11 @@ xrdb merge .Xresources &
 sh ~/.fehbg &
 ## compositing. Required for shadows, transparency and stuff. 
 # Alter compton settings if using intel graphics
-GRAPHIC_CARD=$(lspci | grep -i "vga" | sed 's/.*://' | sed 's/(.*//' | sed 's/^[ \t]*//')
-if [[ $(echo $GRAPHIC_CARD | grep -i 'intel\|lenovo') != "" ]]; then MCODE='initrd=\intel-ucode.img'
-  sed -i 's/"xrender"/"glx"/' ~/.config/picom.conf
-  grep -q 'vsync = true;' ~/.config/picom.conf || echo 'vsync = true;' >> ~/.config/picom.conf
-fi
+#GRAPHIC_CARD=$(lspci | grep -i "vga" | sed 's/.*://' | sed 's/(.*//' | sed 's/^[ \t]*//')
+#if [[ $(echo $GRAPHIC_CARD | grep -i 'intel\|lenovo') != "" ]]; then MCODE='initrd=\intel-ucode.img'
+#  sed -i 's/"xrender"/"glx"/' ~/.config/picom.conf
+#  grep -q 'vsync = true;' ~/.config/picom.conf || echo 'vsync = true;' >> ~/.config/picom.conf
+#fi
 ## Reduces flicker. Disabling saves resources.
 picom -b &
 ## enable local fonts in .fonts directory
@@ -30,7 +30,7 @@ xset s noblank &
 xset s noexpose &
 xset c on &
 xset -dpms &
-xbacklight -set 15 &
+light -S 30 &
 ## Run screenlock when suspending
 light-locker &
 ## Make monitor settings persist between reboots
@@ -43,7 +43,8 @@ xcape -e 'Super_L=Super_L|Shift_L|space;Super_R=Super_R|Shift_R|z' &
 /usr/lib/mate-polkit/polkit-mate-authentication-agent-1 &
 ## Gnome keyring
 gnome-keyring-daemon &
-thunar --daemon &
-/usr/lib/mate-notification-daemon/mate-notification-daemon &
+## Start notification daemon
+dunst &
 ## Welcome message
 sleep 1 && notify-send "Welcome to Manjaro-bspwm" "Press super + F1 to show keybindings" &
+

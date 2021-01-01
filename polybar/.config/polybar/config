@@ -1,11 +1,27 @@
 [colors]
-background = #aa111111
-background-alt = #444444
-foreground = #dfdfdf
-foreground-alt = #888888
-primary = #ffb52a
-secondary = #e60053
-alert = #bd2c40
+
+red_dark = #cc241d
+red_light = #fb4934
+green_dark = #98971a
+green_light = #b8bb26
+yellow_dark = #d79921
+yellow_light = #fabd2f
+blue_dark = #458588
+blue_light = #83a598
+purple_dark = #b16286
+purple_light = #d3869b
+aqua_dark = #689d6a
+aqua_light = #8ec07c
+orange_dark = #d65d0e
+orange_light = #fe8019
+
+background = #bb1d2021
+background-alt = #aa282828
+foreground = #fbf1c7
+foreground-alt = #ebdbb2
+primary = ${colors.orange_light}
+secondary = ${colors.purple_light}
+alert = {colors.red_dark}
 
 [bar/main]
 monitor = ${env:MONITOR:}
@@ -19,21 +35,26 @@ enable-ipc = true
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-border-size = 0
+border-size = 0 
 line-size = 2
 
-separator = %{F#fab52a}|%{F-}
+separator = |
+separator-foreground = ${colors.purple_dark}
 
 font-0 = "NotoSansMono Nerd Font:style=Retina,Regular:size=12"
+font-1 = "NotoSansMono Nerd Font:style=Retina,Regular:size=11"
+font-2 = "NotoSansMono Nerd Font:style=Retina,Regular:size=14"
 
 modules-left = powermenu bspwm
 modules-center =
 modules-right = eth1 wlan pulseaudio backlight battery cpu date 
 
-tray-position = right
+tray-position = center
 tray-padding = 2
 tray-maxsize = 24
-tray-underline = #363636
+tray-underline = #3c3836
+tray-detached = false
+wm-restack = bspwm
 
 [module/filler]
 type = custom/text
@@ -45,15 +66,15 @@ battery = BAT0
 adapter = AC
 full-at = 95
 format-charging =  <label-charging>
-format-charging-underline = #3CAEA3
+format-charging-underline = ${colors.green_light}
 format-charging-padding = 1
 
 format-discharging = <ramp-capacity> <label-discharging>
-format-discharging-underline = #3CAEA3
+format-discharging-underline = ${colors.orange_light}
 format-discharging-padding = 1
 
 format-full =  <label-full>
-format-full-underline = #3CAEA3
+format-full-underline = ${colors.green_dark}
 format-full-padding = 1
 
 ramp-capacity-0 = 
@@ -79,7 +100,7 @@ animation-charging-6 = 
 type = internal/backlight
 card = intel_backlight
 format =  <label>
-format-underline = #ffb300
+format-underline = ${colors.yellow_light}
 format-padding = 1
 label = %percentage%%
 enable_scroll = true
@@ -88,7 +109,7 @@ enable_scroll = true
 type = internal/cpu
 interval = 2
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #20639B
+format-underline = ${colors.blue_dark}
 format = <label>
 format-padding = 1
 label = %percentage%%
@@ -98,26 +119,26 @@ type = internal/network
 interface = wlp2s0
 interval = 5.0
 
-format-connected =  <label-connected>
+format-connected = %{A1:default-terminal -e nmtui:} <label-connected>%{A}
 format-connected-padding = 1
-format-connected-underline = #58508D
-label-connected = %{A1:default-terminal -e nmtui:}%essid%%{A}
+format-connected-underline = ${colors.green_light}
+label-connected = %essid%
 
-format-disconnected = 睊<label-disconnected>
+format-disconnected = %{A1:default-terminal -e nmtui:}睊<label-disconnected>%{A}
 format-disconnected-padding = 1
-label-disconnected =  %{A1:default-terminal -e nmtui:}%{A}
-format-disconnected-underline = #58508D
+label-disconnected = 
+format-disconnected-underline = ${colors.red_light}
 
 [module/eth1]
 type = internal/network
 interface = enp62s0u1u4
 interval = 5.0
 
-format-connected-underline = #58508D
+format-connected-underline = ${colors.green_light}
 label-connected = %{A1:default-terminal -e nmtui:}%{A}
 format-connected-padding = 1
 
-format-disconnected-underline = #58508D
+format-disconnected-underline = ${colors.red_light}
 label-disconnected = %{A1:default-terminal -e nmtui:}%{A}
 
 [module/date]
@@ -131,9 +152,9 @@ time = %H:%M
 time-alt = %H:%M:%S
 
 format-padding = 1
-format-underline = #363636
+format-underline = ${colors.aqua_light}
 
-label = %date% %time%
+label =  %date% %time%
 
 [settings]
 screenchange-reload = true
@@ -141,41 +162,37 @@ screenchange-reload = true
 [module/powermenu]
 type = custom/menu
 
-label-open = ⏻
-label-open-padding = 2
-label-open-underline = #173F5F
-label-close = x
+label-open = %{T3}襤%{T1}
+label-open-padding = 1
+label-open-underline = ${colors.orange_dark}
+label-close = 
 label-separator = |
+label-separator-foreground = ${colors.purple_dark}
 
-menu-0-0 = Suspend 
-menu-0-0-exec = i3lock & systemctl suspend
-menu-0-1 = Power Off 
+; Suspend
+menu-0-0 = %{T2}Suspend%{T1}
+menu-0-0-exec = systemctl suspend
+menu-0-0-underline = ${colors.yellow_dark}
+
+; Power off
+menu-0-1 = %{T2}Power Off%{T1}
 menu-0-1-exec = poweroff
-menu-0-2 = Reboot 
+menu-0-1-underline = ${colors.orange_dark}
+
+; Shutdown
+menu-0-2 = %{T2}Reboot%{T1}
 menu-0-2-exec = systemctl reboot
-
-[module/networkmenu]
-type = custom/menu
-
-label-open = 慎
-label-open-padding = 2
-label-open-underline = #173F5F
-label-close = x
-label-separator = |
-
-menu-1-0 = 
-menu-2-1 = ﬉ 
-menu-1-2 = ﯱ 
+menu-0-2-underline = ${colors.red_dark}
 
 [module/pulseaudio]
 type = internal/pulseaudio
 sink = alsa_output.pci-0000_00_1f.3.analog-stereo
 format-volume = <ramp-volume> <label-volume>
-format-volume-underline = #ff6f69
+format-volume-underline = ${colors.aqua_light}
 format-volume-padding = 1
 label-volume = %percentage%%
 label-muted = 婢 muted
-label-muted-underline = #ff6f69
+label-muted-underline = ${colors.purple_light}
 format-muted-padding = 1
 click-right = pavucontrol
 
@@ -190,54 +207,42 @@ enable-click = true
 enable-scroll = false
 reverse-scroll = false
 
-; ws-icon-0 = 1;♚
-; ws-icon-1 = 2;2
-;ws-icon-2 = 3;III
-; ws-icon-3 = 4;IV
-; ws-icon-4 = 5;V
-; ws-icon-5 = 6;VI
-; ws-icon-6 = 7;VII
-; ws-icon-7 = 8;VII
-; ws-icon-8 = 9;IIX
-; ws-icon-9 = 10;IX
-; ws-icon-default = ♟
-
-ws-icon-0 = I;I
-ws-icon-1 = II;II
-ws-icon-2 = III;III
-ws-icon-3 = IV;IV
-ws-icon-4 = V;V
-ws-icon-5 = VI;VI
-ws-icon-6 = VII;7
-ws-icon-7 = IIX;8
-ws-icon-8 = IX;9
-ws-icon-9 = X;10
+ws-icon-0 = I;
+ws-icon-1 = II;
+ws-icon-2 = III;
+ws-icon-3 = IV;
+ws-icon-4 = V;
+ws-icon-5 = VI;
+ws-icon-6 = VII;
+ws-icon-7 = VIII;
+ws-icon-8 = IX;
+ws-icon-9 = X;
 ws-icon-default = ♟
 
-
-format = <label-state>
+format = %{T3}<label-state>%{T1}
 format-padding = 0
 
 label-mode = %mode%
-label-mode-background = #e60053
+label-mode-background = ${colors.background}
 label-mode-padding = 0
 
-label-focused = %index%
-label-focused-foreground = #ffffff
-label-focused-underline = #ff6f69
+label-focused = %icon%
+label-focused-foreground = ${colors.yellow_light}
+label-focused-underline = ${colors.orange_light}
 label-focused-padding = 2
 
-label-unfocused = %index%
-label-unfocused-padding = 0
+label-urgent = %icon%
+label-urgent-foreground = ${colors.red_dark}
+label-urgent-background = ${colors.background}
+label-urgent-underline = ${colors.red_dark}
+label-urgent-padding = 1
 
-label-visible = %index%
-label-visible-padding = 0
+label-occupied = %icon%
+label-occupied-padding = 0
 
-label-urgent = %index%
-label-urgent-foreground = #ffffff
-label-urgent-background = #bd2c40
-label-urgent-padding = 0
+label-empty = %icon%
+label-empty-padding = 0
 
 label-separator = |
-label-separator-foreground = #ffb52a
+label-separator-foreground = ${colors.purple_dark}
 
