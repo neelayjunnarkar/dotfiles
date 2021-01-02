@@ -274,6 +274,9 @@ super + Tab
 super + shift + space + z
   polybar-msg cmd toggle
 
+super + s
+	/usr/bin/flameshot gui
+
 # Launch fzf Pacsearch
 super + p
 	$TERMINAL -e pacfzf

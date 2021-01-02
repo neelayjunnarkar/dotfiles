@@ -102,7 +102,7 @@ card = intel_backlight
 format =  <label>
 format-underline = ${colors.yellow_light}
 format-padding = 1
-label = %percentage%%
+label = %percentage:2%%
 enable_scroll = true
 
 [module/cpu]
@@ -112,7 +112,7 @@ format-prefix-foreground = ${colors.foreground-alt}
 format-underline = ${colors.blue_dark}
 format = <label>
 format-padding = 1
-label = %percentage%%
+label = %percentage:2%%
 
 [module/wlan]
 type = internal/network
@@ -187,10 +187,10 @@ menu-0-2-underline = ${colors.red_dark}
 [module/pulseaudio]
 type = internal/pulseaudio
 sink = alsa_output.pci-0000_00_1f.3.analog-stereo
-format-volume = <ramp-volume> <label-volume>
+format-volume = <ramp-volume><label-volume>
 format-volume-underline = ${colors.aqua_light}
 format-volume-padding = 1
-label-volume = %percentage%%
+label-volume = %percentage:2%%
 label-muted = 婢 muted
 label-muted-underline = ${colors.purple_light}
 format-muted-padding = 1
