@@ -104,7 +104,7 @@ set softtabstop=2 " Set tabs with two spaces
 set tabstop=2
 set shiftwidth=2
 set t_Co=256 
-set number " Set line number (nonumber/number/relativenumber)
+set number rnu " Set line number (nonumber/number/relativenumber)
 set expandtab " Replace tabs to spaces (too helpful for lans like python)
 set hlsearch " Highlight any results
 set incsearch " Search while you are typing

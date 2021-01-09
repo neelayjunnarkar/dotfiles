@@ -129,7 +129,7 @@
     startup_notification = true
 
     # dmenu path
-    dmenu = /usr/bin/rofi -dmenu -p dunst:
+    dmenu = /usr/bin/rofi -dmenu -p dunst
     browser=$BROWSER
 
 [frame]
@@ -143,13 +143,13 @@
     # xev might be helpful to find names for keys
 
     # close notification
-    close = twosuperior
+    # close = twosuperior
 
     # close all notifications
     close_all = mod4+shift+m
 
     # redisplay last message(s)
-    history = mod4+n
+    # history = mod4+n
 
     # context menu
     context = mod4+shift+i

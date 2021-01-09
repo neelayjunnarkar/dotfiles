@@ -32,7 +32,7 @@ xset c on &
 xset -dpms &
 light -S 30 &
 ## Run screenlock when suspending
-light-locker &
+light-locker --lock-on-suspend --lock-on-lid  &
 ## Make monitor settings persist between reboots
 eval $(awk -F'=' '/Exec=/ {print $2}' ~/.config/autostart/lxrandr-autostart.desktop) &
 ## Notify about package updates
