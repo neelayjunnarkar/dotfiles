@@ -1,0 +1,30 @@
+# Backup
+restic -r <path to backups> backup /storage
+
+# Tagged Backups
+restic -r <path to backups> backup --tag tag1 --tag tag2 /storage
+
+`--tag` can also be used to ammend snapshots.
+
+# Compare snapshots
+restic -r <path to backups> diff <snapshot ID 1> <snapshot ID 2>
+
+# List snapshots
+restic -r <path to backups> snapshots
+
+# Check integrity
+restic -r <path to backups> check
+
+# Restore from snapshot
+# Note: restores into the target folder, so if the snapshot is of a directory,
+# may want the target directory to be the parent of what you want to restore.
+restic -r <path to backups> restore <snapshot ID> --target <target directory>
+
+# Mount snapshot
+restic -r <path to backups> mount <target directory to mount to>
+
+# Remove snapshot
+restic -r <path to backups> forget <snapshot ID>
+
+# Cleanup data. Very time consuming.
+restic -r <path to backups> prune
