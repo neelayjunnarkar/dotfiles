@@ -1,3 +1,5 @@
+# Restic: Backup Tool
+
 # Backup
 restic -r <path to backups> backup /storage
 

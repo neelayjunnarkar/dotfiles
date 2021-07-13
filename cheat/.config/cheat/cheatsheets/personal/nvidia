@@ -1,0 +1,7 @@
+# Setting nvidia GPU to primary
+# Edit /etc/X11/xorg.conf.d/nvidia.conf and set
+Option "PrimaryGPU" "yes"
+
+# Fixing KDE after starting up into KDE
+killall plasmashell
+kstart5 plasmashell

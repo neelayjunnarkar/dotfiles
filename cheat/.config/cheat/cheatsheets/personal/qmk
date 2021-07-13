@@ -1,0 +1,14 @@
+# QMK: Keyboard Firmware
+
+# Compile layout
+qmk compile
+
+# Flash layout
+# Hold both shifts and 'B' to put keyboard into bootloader mode.
+# Then,
+qmk flash
+# If qmk flash does not work, try
+sudo dfu-programmer atmega32u4 erase
+sudo dfu-programmer atmega32u4 flash tokyo60_neelay.hex
+sudo dfu-programmer atmega32u4 reset
+
